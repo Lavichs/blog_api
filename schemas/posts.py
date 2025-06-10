@@ -4,6 +4,7 @@ from pydantic import BaseModel
 class SPostAdd(BaseModel):
     title: str
     content: str
+    theme: str
 
     class Config:
         from_attributes = True

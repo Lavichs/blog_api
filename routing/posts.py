@@ -11,10 +11,23 @@ router = APIRouter(prefix="/posts", tags=["posts"])
 
 @router.get("")
 async def get_all(
+        offset: int = 0,
+        limit: int = 10,
+        theme: str = None,
         post_service: PostService = Depends(get_post_service),
 ) -> List[SPost]:
-    posts = await post_service.get_all()
+    posts = await post_service.get_all(theme, offset, limit)
     return posts
+
+
+@router.get("/{id}")
+async def get_post(
+        id: int,
+        post_service: PostService = Depends(get_post_service),
+) -> SPost | None:
+    post = await post_service.get_one(id)
+    return post
+
 
 @router.post("")
 async def create(

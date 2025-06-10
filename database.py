@@ -33,3 +33,4 @@ class Post(BaseModel):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str]
     content: Mapped[str]
+    theme: Mapped[str]

@@ -14,9 +14,20 @@ class PostRepository:
             await session.commit()
             return res.scalar_one()
 
-    async def find_all(self):
+    async def find_all(self, offset: int, limit: int, theme: str | None):
         async with async_session_maker() as session:
-            stmt = select(self.model)
+            stmt = select(self.model).offset(offset).limit(limit)
+            if theme:
+                stmt = stmt.where(Post.theme == theme)
             res = await session.execute(stmt)
             res = [SPost.model_validate(row[0]) for row in res.all()]
             return res
+
+    async def get(self, id: int) -> SPost | None:
+        async with async_session_maker() as session:
+            stmt = select(self.model).where(PostRepository.model.id == id)
+            result = await session.execute(stmt)
+            post_model = result.scalar_one_or_none()
+            if post_model is None:
+                return None
+            return SPost.model_validate(post_model)
