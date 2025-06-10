@@ -45,3 +45,12 @@ async def delete(
 ) -> bool:
     res = await post_service.delete(id)
     return res
+
+@router.put("/{id}")
+async def update(
+        id: int,
+        post: Annotated[SPostAdd, Depends()],
+        post_service: PostService = Depends(get_post_service),
+) -> bool:
+    res = await post_service.update(id, post)
+    return res

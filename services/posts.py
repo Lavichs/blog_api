@@ -19,3 +19,6 @@ class PostService:
 
     async def delete(self, id: int) -> bool:
         return await self.repository.delete(id)
+
+    async def update(self, id: int, post: SPostAdd) -> bool:
+        return await self.repository.update(id, post.model_dump())
