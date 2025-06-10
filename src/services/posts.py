@@ -1,7 +1,7 @@
 from typing import List
 
-from repository.posts import PostRepository
-from schemas.posts import SPostAdd, SPost
+from src.repository.posts import PostRepository
+from src.schemas.posts import SPostAdd, SPost
 
 
 class PostService:

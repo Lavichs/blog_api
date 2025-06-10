@@ -1,5 +1,5 @@
-from repository.posts import PostRepository
-from services.posts import PostService
+from src.repository.posts import PostRepository
+from src.services.posts import PostService
 
 post_repo = PostRepository()
 post_service = PostService(post_repo)

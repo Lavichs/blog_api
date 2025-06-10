@@ -1,11 +1,10 @@
 from typing import List, Annotated
 
 from fastapi import APIRouter, Depends
-from sqlalchemy import Boolean
 
 from depends import get_post_service
-from schemas.posts import SPost, SPostAdd
-from services.posts import PostService
+from src.schemas.posts import SPost, SPostAdd
+from src.services.posts import PostService
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 

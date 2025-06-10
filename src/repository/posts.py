@@ -1,7 +1,8 @@
 from sqlalchemy import insert, select, delete, update
 
-from database import async_session_maker, Post
-from schemas.posts import SPost
+from database import async_session_maker
+from src.models.models import Post
+from src.schemas.posts import SPost
 
 
 class PostRepository:
