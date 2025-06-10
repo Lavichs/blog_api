@@ -1,6 +1,7 @@
 from typing import List, Annotated
 
 from fastapi import APIRouter, Depends
+from sqlalchemy import Boolean
 
 from depends import get_post_service
 from schemas.posts import SPost, SPostAdd
@@ -36,3 +37,11 @@ async def create(
 ) -> SPost:
     post = await post_service.add(post)
     return post
+
+@router.delete("/{id}")
+async def delete(
+        id: int,
+        post_service: PostService = Depends(get_post_service),
+) -> bool:
+    res = await post_service.delete(id)
+    return res

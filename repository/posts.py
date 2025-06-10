@@ -1,4 +1,4 @@
-from sqlalchemy import insert, select
+from sqlalchemy import insert, select, delete
 
 from database import async_session_maker, Post
 from schemas.posts import SPost
@@ -31,3 +31,10 @@ class PostRepository:
             if post_model is None:
                 return None
             return SPost.model_validate(post_model)
+
+    async def delete(self, id: int) -> bool:
+        async with async_session_maker() as session:
+            stmt = delete(self.model).where(PostRepository.model.id == id)
+            result = await session.execute(stmt)
+            await session.commit()
+            return result.rowcount > 0

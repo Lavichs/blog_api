@@ -16,3 +16,6 @@ class PostService:
 
     async def get_one(self, id: int) -> SPost | None:
         return await self.repository.get(id)
+
+    async def delete(self, id: int) -> bool:
+        return await self.repository.delete(id)
